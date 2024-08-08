@@ -30,14 +30,14 @@ class GalleryAdmin(admin.TabularInline):
     exclude = ("alt",)
 
 
+class ResumeAdmin(admin.StackedInline):
+    model = Resume
+    exclude = ("name", "role", "text")
+
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    inlines = (IntroAdmin, DescriptionAdmin, AvatarAdmin, GalleryAdmin, DetailAdmin)
-
-
-@admin.register(Resume)
-class ResumeAdmin(admin.ModelAdmin):
-    exclude = ("name", "role", "text")
+    inlines = (IntroAdmin, DescriptionAdmin, AvatarAdmin, GalleryAdmin, DetailAdmin, ResumeAdmin)
 
 
 class BenefitItemAdmin(admin.StackedInline):
