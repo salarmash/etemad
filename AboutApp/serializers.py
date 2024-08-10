@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Award, AwardItems, TestItems, Testimonial, ServiceItem, Service, Contact, Signature, Company, \
-    Company2, CompanyImage, Company2Image, Process, Partner, AboutExtra, AllProcess, Group
+    Company2, CompanyImage, Company2Image, Process, Partner, AllProcess, Group
 
 
 class AwardItemSerializer(serializers.ModelSerializer):
@@ -132,17 +132,17 @@ class ProcessSerializer(serializers.ModelSerializer):
 
 
 class PartnerSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Partner
         fields = ['id', 'title', 'image']
 
-
-class AboutExtraSerializer(serializers.ModelSerializer):
-    partner = PartnerSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = AboutExtra
-        fields = ['id', 'name', 'partner']
+    def get_image(self, obj):
+        request = self.context.get("request")
+        if obj.image:
+            image_url = obj.image.url
+            return request.build_absolute_uri(image_url)
 
 
 class GroupSerializer(serializers.ModelSerializer):

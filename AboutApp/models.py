@@ -142,14 +142,6 @@ class Company2Image(models.Model):
         return self.company2.title
 
 
-class AboutExtra(models.Model):
-    name = models.CharField(max_length=50, verbose_name="نام گروه")
-
-    class Meta:
-        verbose_name = "شرکت همکار"
-        verbose_name_plural = "شرکت های همکار"
-
-
 class AllProcess(models.Model):
     title = models.CharField(max_length=200, verbose_name="عنوان")
     subtitle = models.CharField(max_length=255, verbose_name="زیرنویس")
@@ -188,13 +180,12 @@ class Process(models.Model):
 
 
 class Partner(models.Model):
-    about = models.ForeignKey(AboutExtra, on_delete=models.CASCADE, related_name="partner")
     title = models.CharField(max_length=100, verbose_name="شرکت همکار")
     image = models.ImageField(upload_to="About", blank=True, null=True)
 
     class Meta:
-        verbose_name = "آیتم"
-        verbose_name_plural = "آیتم ها"
+        verbose_name = "شرکت همکار"
+        verbose_name_plural = "شرکت های همکار"
 
     def __str__(self):
         return self.title

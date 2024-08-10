@@ -1,9 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import AwardSerializer, TestimonialSerializer, ServiceSerializer, ContactSerializer, \
-    CompanySerializer, Company2Serializer, AboutExtraSerializer, \
+    CompanySerializer, Company2Serializer, PartnerSerializer, \
     AllProcessSerializer
-from .models import Award, Testimonial, Service, Contact, Company, Company2, AboutExtra, AllProcess
+from .models import Award, Testimonial, Service, Contact, Company, Company2, Partner, AllProcess
 from rest_framework import status
 
 
@@ -45,7 +45,7 @@ class ProcessView(APIView):
 
 class PartnerView(APIView):
     def get(self, request):
-        extra = AboutExtra.objects.all().last()
-        data = AboutExtraSerializer(instance=extra, context={"request": request}).data
+        partner = Partner.objects.all()
+        data = PartnerSerializer(instance=partner, many=True, context={"request": request}).data
 
         return Response(data=data, status=status.HTTP_200_OK)

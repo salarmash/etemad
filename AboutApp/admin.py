@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Award, AwardItems, Testimonial, TestItems, Service, ServiceItem, Contact, Signature, Company, \
-    Company2, CompanyImage, Company2Image, Process, Partner, AboutExtra, AllProcess, Group
+    Company2, CompanyImage, Company2Image, Process, Partner, AllProcess, Group
 
 
 class AwardItemAdmin(admin.StackedInline):
@@ -63,18 +63,10 @@ class ProcessAdmin(admin.StackedInline):
         return super().has_add_permission(request, obj)
 
 
-class PartnerAdmin(admin.TabularInline):
-    model = Partner
-
-
-@admin.register(AboutExtra)
-class ExtraAdmin(admin.ModelAdmin):
-    inlines = (PartnerAdmin,)
-
-
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
     inlines = (ProcessAdmin,)
 
 
 admin.site.register(AllProcess)
+admin.site.register(Partner)
