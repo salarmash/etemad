@@ -21,6 +21,7 @@ from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('HomeApp.urls')),
     path('about/', include('AboutApp.urls')),
     path('team/', include("TeamApp.urls")),
     path('projects/', include("ProjectApp.urls")),
